@@ -123,46 +123,76 @@ BaaS 기반 임베디드 금융 서비스입니다.
 ## 🍔 멤버
 <table>
  <tr>
-   <td height="140px" align="center" width="16.66%"> <a href="https://github.com/jihyuk0414"> <img src="https://avatars.githubusercontent.com/u/123541776?v=4" width="140px" />
-     <br /> 임지혁</a></td>
-   <td height="140px" align="center" width="16.66%"> <a href="https://github.com/hyeri1126"> <img src="https://avatars.githubusercontent.com/u/114209093?v=4" width="140px" />
-     <br /> 류혜리</a></td>
-   <td height="140px" align="center" width="16.66%"> <a href="https://github.com/ksp0814"> <img src="https://avatars.githubusercontent.com/u/122997638?v=4" width="140px" />
-     <br /> 강세필</a></td>
-   <td height="140px" align="center" width="16.66%"> <a href="https://github.com/gusdk19"> <img src="https://avatars.githubusercontent.com/u/128590006?v=4" width="140px" />
-     <br /> 이현아</a></td>
-   <td height="140px" align="center" width="16.66%"> <a href="https://github.com/my123dsa"> <img src="https://avatars.githubusercontent.com/u/174989195?v=4" width="140px" />
-     <br /> 박준현</a></td>
-   <td height="140px" align="center" width="16.66%"> <a href="https://github.com/apple6346654"> <img src="https://avatars.githubusercontent.com/u/174989500?v=4" width="140px" />
-     <br /> 정성윤</a></td>
+   <td height="140px" align="center" width="33%"> 
+     <a href="https://github.com/jihyuk0414"> 
+       <img src="https://avatars.githubusercontent.com/u/123541776?v=4" width="140px" />
+       <br /> 임지혁
+     </a>
+   </td>
+   <td height="140px" align="center" width="33%"> 
+     <a href="https://github.com/hyeri1126"> 
+       <img src="https://avatars.githubusercontent.com/u/114209093?v=4" width="140px" />
+       <br /> 류혜리
+     </a>
+   </td>
+   <td height="140px" align="center" width="33%"> 
+     <a href="https://github.com/ksp0814"> 
+       <img src="https://avatars.githubusercontent.com/u/122997638?v=4" width="140px" />
+       <br /> 강세필
+     </a>
+   </td>
  </tr>
  <tr>
    <td align="center">팀장</td>
    <td align="center">Frontend 팀장</td>
    <td align="center">PM<br/>Frontend 팀원<br/>Backend 팀원</td>
-   <td align="center">PM<br/>Frontend 팀원<br/>Backend 팀원</td>
-   <td align="center">Backend 팀장</td>
-   <td align="center">Frontend 팀원<br/>Backend 팀원</td>
  </tr>
  <tr>
-   <td align="left" style="padding: 12px; word-break: keep-all;">
+   <td align="left" style="padding: 12px;">
      • MSA 플랫폼 구축<br/>
-     • 원 클릭 간편장부,<br/>&nbsp;&nbsp;급여명세서 발급 구현<br/>
-     • ECS 활용 컨테이너<br/>&nbsp;&nbsp;오케스트레이션<br/>
+     • 원 클릭 간편장부, 급여명세서 발급 구현<br/>
+     • ECS 활용 컨테이너 오케스트레이션<br/>
      • CDC 구축<br/>
-     • 급여 자동 이체<br/>&nbsp;&nbsp;로직 고안
+     • 급여 자동 이체 로직 고안
    </td>
-   <td align="left" style="padding: 12px; word-break: keep-all;">
-     • FrontEnd 컴포넌트<br/>&nbsp;&nbsp;구조 설계<br/>
-     • JWT 활용 인증/인가<br/>&nbsp;&nbsp;(FrontEnd)<br/>
+   <td align="left" style="padding: 12px;">
+     • FrontEnd 컴포넌트 구조 설계<br/>
+     • JWT 활용 인증/인가(FrontEnd)<br/>
      • UI/UX 총괄<br/>
-     • 출,퇴근 확인<br/>&nbsp;&nbsp;캘린더 페이지 구현
+     • 출,퇴근 확인 캘린더 페이지 구현
    </td>
    <td align="left" style="padding: 12px;">
      • 프로젝트 기획<br/>
      • CORE BANKING 구축<br/>
      • 외부 API 통신
    </td>
+ </tr>
+ <tr>
+   <td height="140px" align="center" width="33%"> 
+     <a href="https://github.com/gusdk19"> 
+       <img src="https://avatars.githubusercontent.com/u/128590006?v=4" width="140px" />
+       <br /> 이현아
+     </a>
+   </td>
+   <td height="140px" align="center" width="33%"> 
+     <a href="https://github.com/my123dsa"> 
+       <img src="https://avatars.githubusercontent.com/u/174989195?v=4" width="140px" />
+       <br /> 박준현
+     </a>
+   </td>
+   <td height="140px" align="center" width="33%"> 
+     <a href="https://github.com/apple6346654"> 
+       <img src="https://avatars.githubusercontent.com/u/174989500?v=4" width="140px" />
+       <br /> 정성윤
+     </a>
+   </td>
+ </tr>
+ <tr>
+   <td align="center">PM<br/>Frontend 팀원<br/>Backend 팀원</td>
+   <td align="center">Backend 팀장</td>
+   <td align="center">Frontend 팀원<br/>Backend 팀원</td>
+ </tr>
+ <tr>
    <td align="left" style="padding: 12px;">
      • 서비스 기획<br/>
      • 매/지출 그래프 시각화<br/>
@@ -175,8 +205,8 @@ BaaS 기반 임베디드 금융 서비스입니다.
      • 자동 급여명세서 발급<br/>
      • BE CI/CD 파이프라인 구축
    </td>
-   <td align="left" style="padding: 12px; word-break: keep-all;">
-     • Core Bank 데이터셋<br/>&nbsp;&nbsp;구성 및 서버 구축<br/>
+   <td align="left" style="padding: 12px;">
+     • Core Bank 데이터셋 구성 및 서버 구축<br/>
      • 사용자 인증<br/>
      • 사용자 정보 CRUD<br/>
      • Cypress 테스트 총괄
