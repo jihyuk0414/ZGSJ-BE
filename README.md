@@ -145,7 +145,7 @@ BaaS 기반 임베디드 금융 서비스입니다.
    <td align="center">Frontend 팀원<br/>Backend 팀원</td>
  </tr>
  <tr>
-   <td align="left" style="padding: 8px;">
+   <td align="left" style="padding: 12px;">
      • MSA 플랫폼 구축<br/>
      • 원 클릭 간편장부, 급여명세서 발급 구현<br/>
      • ECS 활용 컨테이너 오케스트레이션 <br/>
@@ -153,7 +153,7 @@ BaaS 기반 임베디드 금융 서비스입니다.
      • 급여 자동 이체 로직 고안
    </td>
    <td align="left" style="padding: 8px;">
-     • FrontEnd 컴포넌트 구조 설계
+     • FrontEnd 컴포넌트 구조 설계 <br/>
      • JWT 활용 인증/인가(FrontEnd) <br/>
      • UI/UX 총괄 <br/>
      • 출,퇴근 확인 캘린더 페이지 구현
