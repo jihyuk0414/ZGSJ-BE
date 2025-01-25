@@ -42,4 +42,4 @@ build/
 
 
 src/main/resources/woven-coral-441407-d3-59f4b86ecd42.json
-#src/main/resources
+src/main/resources/application.yml
