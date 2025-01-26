@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Component
-@FeignClient(name = "CoreBank", url = "http://3.39.182.226:3030", configuration = FeignConfig.class)
+@FeignClient(name = "CoreBank", url = "http://localhost:3030", configuration = FeignConfig.class)
 public interface FeignWithCoreBank {
 
     @PostMapping("/bank/automatictransfer")
