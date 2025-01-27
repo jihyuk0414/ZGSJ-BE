@@ -11,6 +11,6 @@ public class FeignConfig {
         // period: 초기 재시도 간격(ms)
         // maxPeriod: 최대 재시도 간격(ms)
         // maxAttempts: 최대 재시도 횟수
-        return new Retryer.Default(60000, 60000, 3);
+        return new Retryer.Default(10000, 10000, 3);
     }
 }
