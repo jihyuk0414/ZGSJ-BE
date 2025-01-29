@@ -115,7 +115,8 @@ public class EmailService {
             log.info(" {}에게 급여명세서: {} 전송에 성공했습니다:", toMail, content);
         } catch (MailSendException sme)
         {
-            log.error("존재하지 않는 이메일 : {}" ,toMail);
+            String errorMessage = sme.getMessage();
+            log.error("에러 상세: {}", errorMessage);
             throw new CustomException(ErrorCode.NOT_EXISTS_EMAIL);
         }  catch (MessagingException e) {
             log.error("이메일 전송 실패: {}", e.getMessage());

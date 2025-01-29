@@ -32,19 +32,26 @@ public class BankCoreService {
 
         // 리스트 정렬해서 받음.
         // 여기 로직 더 효율적이게 변경 되어야함
-        log.info("{} {} {} ",transferRequest.getToAccount(),transferRequest.getToBankCode(),transferRequest.getToAccountDepositor());
-        log.info("{} {} {} ",transferRequest.getFromAccount(),transferRequest.getFromBankCode(),transferRequest.getFromAccountDepositor());
-        log.info("첫째");
-        Account fromAccount = findFromAccount(transferRequest);
-        log.info("둘째");
-        Account toAccount = findToAccount(transferRequest);
+        try{
 
-        validateBalance(fromAccount, transferRequest.getAmount());
+            log.info("{} {} {} ",transferRequest.getToAccount(),transferRequest.getToBankCode(),transferRequest.getToAccountDepositor());
+            log.info("{} {} {} ",transferRequest.getFromAccount(),transferRequest.getFromBankCode(),transferRequest.getFromAccountDepositor());
+            log.info("첫째");
+            Account fromAccount = findFromAccount(transferRequest);
+            log.info("둘째");
+            Account toAccount = findToAccount(transferRequest);
 
-        LocalDate now = LocalDate.now();
-        updateBalances(fromAccount, toAccount, transferRequest.getAmount());
-        createHistories(fromAccount, toAccount,transferRequest.getAmount(),now);
-        return now;
+            validateBalance(fromAccount, transferRequest.getAmount());
+
+            LocalDate now = LocalDate.now();
+            updateBalances(fromAccount, toAccount, transferRequest.getAmount());
+            createHistories(fromAccount, toAccount,transferRequest.getAmount(),now);
+            return now;
+        } catch (Exception e)
+        {
+            log.info(e.getMessage()+"오류발생");
+            return null;
+        }
     }
 
     private void updateBalances(Account fromAccount, Account toAccount, Long amount){

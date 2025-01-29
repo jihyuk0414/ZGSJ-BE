@@ -45,7 +45,7 @@ public class StoreEmployee {
 
     @Column(name = "payment_date", nullable = false)
     @Min(1)
-    @Max(28)
+//    @Max(28)
     private Integer paymentDate;
 
 

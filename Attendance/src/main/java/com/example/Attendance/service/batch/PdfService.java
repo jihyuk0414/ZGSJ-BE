@@ -21,9 +21,9 @@ public class PdfService {
         try {
             ITextRenderer renderer = new ITextRenderer();
 
-            // 폰트 설정
-            String fontPath = "/app/fonts/NanumGothic-Regular.ttf";
-
+            // 폰트 설정 //배포 시
+//            String fontPath = "/app/fonts/NanumGothic-Regular.ttf";
+            String fontPath = "/fonts/NanumGothic-Regular.ttf";
             // 폰트 등록
             renderer.getFontResolver().addFont(
                     fontPath,

@@ -37,10 +37,11 @@ public class AttendanceJobConfig {
     @Bean
     public Job attendanceJob() {
         return new JobBuilder("automaticTransferJob", jobRepository)
-                .listener(attendanceBatchJobListener.attendanceJobListener()) // Listener 등록
-                .start(attendanceStep()).on("*").to(statementPdfStep())
-                .from(statementPdfStep()).on("*").to(statementEmailStep())
-                .from(statementEmailStep()).on("*").end()
+                .listener(attendanceBatchJobListener.attendanceJobListener())
+                .start(attendanceStep())
+                .on("FAILED").fail()  // attendanceStep이 실패하면 Job 전체 실패
+                .from(attendanceStep()).on("COMPLETED").to(statementPdfStep())  // 성공시에만 다음 단계
+                .next(statementEmailStep())
                 .end()
                 .build();
     }

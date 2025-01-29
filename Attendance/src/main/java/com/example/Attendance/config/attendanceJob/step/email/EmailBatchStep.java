@@ -81,6 +81,7 @@ public class EmailBatchStep {
                         true,
                         item.getIsMask());
             } catch (Exception e) {
+                log.error("Email 처리 중 오류: ", e);
                 throw new CustomException(ErrorCode.SERVER_ERROR);
             }
         };

@@ -6,6 +6,7 @@ import com.example.Attendance.error.ErrorCode;
 import com.example.Attendance.error.ErrorDTO;
 import com.example.Attendance.error.FeignExceptionHandler;
 import com.example.Attendance.error.log.ErrorType;
+import com.example.Attendance.feign.CoreBankFeignClient;
 import com.example.Attendance.feign.FeignWithCoreBank;
 import com.example.Attendance.model.Batch;
 import com.example.Attendance.repository.BatchRepository;
@@ -40,16 +41,20 @@ public class SalaryBatchStep {
     private final FeignWithCoreBank feignWithCoreBank;
     private final CalculateService calculateService;
     private final FeignExceptionHandler handler;
+    private final CoreBankFeignClient coreBankFeignClient;
 
     @Bean("salaryReader")
     public ItemReader<BatchInputData> salaryReader() {
         return () -> {
             try {
                 if (salaryBatchState.getEmployees() == null) {
+                    log.info("찾아오기 시도");
                     if (!salaryBatchState.setEmployees(storeEmployeeService.
                             findStoreEmployeeByTypeAndPaymentDate(salaryBatchState.getPaymentDay()))) {
+                        log.info("사람없음");
                         return null;
                     }
+                    log.info("찾아오기 성공");
                     salaryBatchState.setCommutes(commuteService.
                             findAllByCommuteDateBetween(salaryBatchState.getEmployeeIds(),
                                     salaryBatchState.getLocalDate()));
@@ -76,18 +81,11 @@ public class SalaryBatchStep {
                 TransferRequest request = TransferRequest.from(item);
                 TransferRequest adminRequest = TransferRequest.fromForAdmin(request);
 
-                TransferResponse response = feignWithCoreBank.automaticTransfer(request);
+//                TransferResponse response = feignWithCoreBank.automaticTransfer(request);
+                //수수료 입금 로직 제거
 
-                try {
-                    TransferResponse responseAdmin = feignWithCoreBank.automaticTransfer(adminRequest);  // 수수료 이체
-                    return BatchOutputData.of(response, item,true);
-                } catch (FeignException fe) {
-                    // 수수료 이체 실패 시 로깅 및 알림
-                    log.error("수수료 이체 실패 - amount={}, error={}", adminRequest.getAmount(), fe.getMessage());
-
-                    // 직원급여는 정상 처리된 것으로 처리
-                    return BatchOutputData.of(response, item,false);
-                }
+                TransferResponse response = coreBankFeignClient.automaticTransfer(request);
+                return BatchOutputData.of(response, item, true);
             } catch (FeignException fe) {
                 log.error("금융서버 통신 실패 - president_account={}, employee_account={}, error={}, type={}",
                         item.getFromAccount(), item.getToAccount(), fe.getMessage(), ErrorType.FEIGN_EXCEPTION.name());
