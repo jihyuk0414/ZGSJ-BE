@@ -45,9 +45,26 @@ public class BatchCheckRunner {
             JobExecution lastExecution = jobRepository
                     .getLastJobExecution("automaticTransferJob", params);
 
-            if (lastExecution == null || lastExecution.getStatus().isUnsuccessful()) {
+            if (lastExecution == null) {
                 log.info("오늘 배치 미실행. 배치 실행");
                 jobLauncher.run(attendanceJob, params);
+            } else if(lastExecution.getStatus().isUnsuccessful())
+            {
+                log.info("이전 실패된 기록이 존재합니다. 해당 내역 재 실행합니다");
+                //실패 내역을 찾아서
+                String failedStep = lastExecution.getStepExecutions().stream()
+                        .filter(stepExecution -> stepExecution.getStatus().isUnsuccessful())
+                        .findFirst()
+                        .map(stepExecution -> stepExecution.getStepName())
+                        .orElse(null);
+
+                // 새로운 파라미터 생성 (restart 파라미터로 확실한 차이)
+                JobParameters newParams = new JobParametersBuilder(params)
+                        .addString("restart", failedStep)
+                        .addLong("time", System.currentTimeMillis())
+                        .toJobParameters();
+
+                jobLauncher.run(attendanceJob, newParams);
             }
         } catch (Exception e) {
             log.error("서버 시작시 배치 체크 실패: {}", e.getMessage());
