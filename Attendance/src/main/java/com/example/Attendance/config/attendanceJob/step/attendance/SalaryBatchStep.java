@@ -84,18 +84,8 @@ public class SalaryBatchStep {
 //                TransferResponse response = feignWithCoreBank.automaticTransfer(request);
                 //수수료 입금 로직 제거
 
-                TransferResponse response = null;
-                try {
-                    //프록시 활용, 서킷 브레이커
-                    response = coreBankFeignClient.automaticTransfer(request);
-                    return BatchOutputData.of(response, item, true);
-                } catch (FeignException fe) {
-                    // 수수료 이체 실패 시 로깅 및 알림
-                    log.error("수수료 이체 실패 - amount={}, error={}", adminRequest.getAmount(), fe.getMessage());
-
-                    // 직원급여는 정상 처리된 것으로 처리
-                    return BatchOutputData.of(response, item, false);
-                }
+                TransferResponse response = coreBankFeignClient.automaticTransfer(request);
+                return BatchOutputData.of(response, item, true);
             } catch (FeignException fe) {
                 log.error("금융서버 통신 실패 - president_account={}, employee_account={}, error={}, type={}",
                         item.getFromAccount(), item.getToAccount(), fe.getMessage(), ErrorType.FEIGN_EXCEPTION.name());
