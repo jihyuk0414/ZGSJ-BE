@@ -1,45 +1,26 @@
 server:
   port: 8888
 spring:
-  jmx:
-    enabled: false
   application:
     name: API-Gateway
   cloud:
-    config:
-      enabled: false
     gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
       routes:
-        - id: finance-service
-          uri: http://finance.msanew:8080
-          predicates:
-            - Path=/finance/**
-          filters:
-            - StripPrefix=1
-
         - id: User-service
-          uri: http://user.msanew:7070
+          uri: http://user-service  # 쿠버네티스 서비스 이름
           predicates:
             - Path=/user/**
           filters:
             - StripPrefix=1
-
         - id: Attendance-service
-          uri: http://attendance.msanew:6060
+          uri: http://attendance-service  # 쿠버네티스 서비스 이름
           predicates:
             - Path=/attendance/**
           filters:
             - StripPrefix=1
+
     discovery:
-      enabled: true
-      client:
-        aws:
-          discovery:
-            enabled: true
+      enabled: false
 
 logging:
   level:
