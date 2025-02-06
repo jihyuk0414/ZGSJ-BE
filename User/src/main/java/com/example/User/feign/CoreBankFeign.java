@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Component
-@FeignClient(name = "CoreBank", url = "http://3.39.182.226:3030")
+//@FeignClient(name = "CoreBank", url = "http://3.39.182.226:3030")
+@FeignClient(name = "CoreBank", url = "http://corebank-service.default.svc.cluster.local:3030")
 public interface CoreBankFeign {
 
     @PostMapping("/businesscheck")

@@ -30,10 +30,10 @@ public class BatchCheckRunner {
 
         LocalTime now = LocalTime.now();
         LocalTime targetTime = LocalTime.of(4, 0);
-        if (now.isBefore(targetTime)) {
-            log.info("4시 이전이므로 배치 체크 스킵");
-            return;
-        }
+//        if (now.isBefore(targetTime)) {
+//            log.info("4시 이전이므로 배치 체크 스킵");
+//            return;
+//        }
 
         String dateParam = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
