@@ -14,19 +14,19 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 def connect_to_database():
-  try:
-      connection = mysql.connector.connect(
-          host="host.docker.internal",
-          port=3306,
-          database="attendance", 
-          user="root",
-          password="1234"
-      )
-      logger.info("Successfully connected to MySQL database")
-      return connection
-  except Error as e:
-      logger.error(f"Error connecting to database: {e}")
-      return None
+    try:
+        connection = mysql.connector.connect(
+            host="attendance-service.databases.svc.cluster.local",
+            port=3306,
+            database="attendance",
+            user="root",
+            password="1234"
+        )
+        logger.info("Successfully connected to MySQL database")
+        return connection
+    except Error as e:
+        logger.error(f"Error connecting to database: {e}")
+        return None
 
 
 def handle_message(msg_value):
@@ -264,7 +264,7 @@ def process_messages(topic, handler_func):
 
           consumer = KafkaConsumer(
               topic,
-              bootstrap_servers=['kafka:29092'],
+              bootstrap_servers=['localhost:29092'],
               auto_offset_reset='earliest',
               enable_auto_commit=True,
               group_id=f'{topic.replace(".", "_")}_sync_group',
@@ -312,7 +312,7 @@ def main():
 
    try:
        temp_consumer = KafkaConsumer(
-           bootstrap_servers=['kafka:29092']
+           bootstrap_servers=['localhost:29092']
        )
        existing_topics = temp_consumer.topics()
        logger.info(f"Available topics: {existing_topics}")
