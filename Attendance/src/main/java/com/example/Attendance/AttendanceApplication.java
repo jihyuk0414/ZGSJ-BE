@@ -17,6 +17,7 @@ import java.util.TimeZone;
 public class AttendanceApplication {
 
 	public static void main(String[] args) {
+		log.info("new ver");
 		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
 		log.info("=== Time Zone Configuration ===");
 		log.info("System Default TimeZone: {}", TimeZone.getDefault().getID());
