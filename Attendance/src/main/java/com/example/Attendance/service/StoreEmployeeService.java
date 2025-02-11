@@ -26,20 +26,22 @@ public class StoreEmployeeService {
 
         //이메일 디코딩
         String email  =cryptography.decrypt(encryptedEmail);
+        log.info("email여기있음 " + email);
         StoreEmployee storeEmployee=storeEmployeeRepository.findByEmailAndStoreId(email,storeId)
                 .orElseThrow(()->new CustomException(ErrorCode.INVALID_EMPLOYEE));
+        log.info("email로 직원 찾았음"+storeEmployee);
         Double sLat=storeEmployee.getStore().getLatitude();
         Double sLong=storeEmployee.getStore().getLongitude();
         double rangeLat = 0.0009; // 위도 100m 범위
         double rangeLon = 0.0011; // 경도 100m 범위
 
-        Double reLat= request.getLatitude();
-        Double reLong= request.getLongitude();
-        boolean isLat=reLat <= sLat+rangeLat && reLat>=sLat-rangeLat;
-        boolean isLong= reLong<= sLong+rangeLon && reLong>=sLong-rangeLon;
-        if (!isLat || !isLong){
-            throw new CustomException(ErrorCode.INVALID_LOCATION);
-        }
+//        Double reLat= request.getLatitude();
+//        Double reLong= request.getLongitude();
+//        boolean isLat=reLat <= sLat+rangeLat && reLat>=sLat-rangeLat;
+//        boolean isLong= reLong<= sLong+rangeLon && reLong>=sLong-rangeLon;
+//        if (!isLat || !isLong){
+//            throw new CustomException(ErrorCode.INVALID_LOCATION);
+//        }
         return storeEmployee;
     }
 
