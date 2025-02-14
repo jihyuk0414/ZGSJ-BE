@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: zgsj-be
+  namespace: default
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/jihyuk0414/ZGSJ-BE.git
+    targetRevision: k8s  # 특정 브랜치 지정
+    path: k8s/  # 쿠버네티스 매니페스트가 있는 디렉토리
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true  # 더 이상 Git에 없는 리소스 자동 삭제
+      selfHeal: true  # 클러스터 상태가 Git과 다르면 자동 동기화
