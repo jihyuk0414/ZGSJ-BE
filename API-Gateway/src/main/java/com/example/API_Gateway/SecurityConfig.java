@@ -31,6 +31,7 @@ public class SecurityConfig {
         permitUrls.add("/president/id-find"); // id 찾기는 인증 없이도 가능하도록 해야하니까
         permitUrls.add("/president/check/email");
         permitUrls.add("/president/resetPassword");
+        permitUrls.add("/argocd");
 
         List<String> needIdUrls = new ArrayList<>();
         needIdUrls.add("/president/logout");
