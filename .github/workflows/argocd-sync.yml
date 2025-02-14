@@ -43,7 +43,7 @@ jobs:
     - name: Update k8s Deployment
       run: |
         # 이미지 태그를 동적으로 deployment yaml에 적용
-        sed -i "s|image: jihyukdocker/api-gw:.*|image: jihyukdocker/api-gw:v1.0.1|" k8s/api-gateway-deployment.yaml
+        sed -i "s|image: jihyukdocker/api-gw:.*|image: jihyukdocker/api-gw:v1.0.1|" k8s/apigw.yaml
         
         # 변경된 파일 커밋 및 푸시
         git config user.name github-actions
