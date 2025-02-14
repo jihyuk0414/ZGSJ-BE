@@ -1,0 +1,89 @@
+# ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: api-gateway-config
+data:
+ application.yml: |
+   server:
+     port: 8888
+   spring:
+     application:
+       name: API-Gateway
+     cloud:
+       gateway:
+         routes:
+           - id: User-service
+             uri: http://user-service.default.svc.cluster.local:7070
+             predicates:
+               - Path=/user/**
+             filters:
+               - StripPrefix=1
+           - id: Attendance-service
+             uri: http://attendance-service.default.svc.cluster.local:6060
+             predicates:
+               - Path=/attendance/**
+             filters:
+               - StripPrefix=1
+           - id: ArgoCD-service
+             uri: http://argocd-server.default.svc.cluster.local:80
+             predicates:
+               - Path=/argocd/**
+             filters:
+               - StripPrefix=1
+       discovery:
+         enabled: false
+   logging:
+     level:
+       org.springframework.cloud.gateway: TRACE
+       org.springframework.cloud.loadbalancer: TRACE
+       org.springframework.web.reactive.function.client: TRACE
+       reactor.netty.http.client: DEBUG
+       org.springframework.cloud.gateway.filter.LoadBalancerClientFilter: TRACE
+       org.springframework.cloud.gateway.handler.RoutePredicateHandlerMapping: TRACE
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: api-gateway
+spec:
+ selector:
+   matchLabels:
+     app: api-gateway
+ replicas: 1
+ template:
+   metadata:
+     labels:
+       app: api-gateway
+   spec:
+     containers:
+     - name: api-gateway
+       image: jihyukdocker/api-gw:v1.0.1
+       ports:
+       - containerPort: 8888
+       env:
+       - name: SPRING_PROFILES_ACTIVE
+         value: "prod"
+       volumeMounts:
+       - name: config-volume
+         mountPath: /app/config
+     volumes:
+     - name: config-volume
+       configMap:
+         name: api-gateway-config
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+ name: api-gateway-service
+spec:
+ selector:
+   app: api-gateway
+ ports:
+   - name: http
+     protocol: TCP
+     port: 8888
+     targetPort: 8888
+ type: ClusterIP
